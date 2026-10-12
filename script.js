@@ -45,9 +45,14 @@ fileInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
+    if (file.type !== 'application/pdf' && !file.name.endsWith('.pdf')) {
+        alert('Por favor, selecione um arquivo no formato PDF.');
+        return;
+    }
+
     try {
         selectedFile = file;
-        uploadStatus.textContent = `Arquivo carregado: ${file.name}`;
+        uploadStatus.textContent = `Documento PDF carregado: ${file.name}`;
         infoName.textContent = file.name;
 
         const arrayBuffer = await file.arrayBuffer();
