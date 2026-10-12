@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerador de Páginas PDF - Local & Seguro</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- pdf-lib para manipulação do PDF no navegador -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+</head>
+<body>
+
+    <div class="app-card">
+        <!-- CABEÇALHO -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="brand">
+                    <span class="brand-icon">🔢</span>
+                    <div>
+                        <h1>Numerador de Páginas PDF</h1>
+                        <p>Adicione numeração personalizada às páginas do seu PDF</p>
+                    </div>
+                </div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Alternar Tema">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <!-- SELEÇÃO DE ARQUIVO -->
+            <section class="panel">
+                <h2 class="panel-title">1. Selecionar Arquivo PDF</h2>
+                <div class="upload-zone" id="drop-zone">
+                    <input type="file" id="file-input" accept=".pdf">
+                    <label for="file-input" class="upload-label">
+                        <span class="upload-icon">📄</span>
+                        <div class="upload-text">
+                            <strong id="upload-status">Clique para selecionar ou arraste um PDF aqui</strong>
+                            <span>Selecione um documento para numerar</span>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- DETALHES DO ARQUIVO -->
+            <section class="panel hidden" id="file-info-panel">
+                <h2 class="panel-title">2. Informações do Documento</h2>
+                <div class="info-grid">
+                    <div><strong>Nome:</strong> <span id="info-name">-</span></div>
+                    <div><strong>Total de Páginas:</strong> <span id="info-pages">-</span></div>
+                </div>
+            </section>
+
+            <!-- OPÇÕES DE CONFIGURAÇÃO DA NUMERAÇÃO -->
+            <section class="panel">
+                <h2 class="panel-title">3. Configurações de Numeração</h2>
+                
+                <div class="options-grid">
+                    <div class="input-group">
+                        <label for="position-select">Posição da Numeração:</label>
+                        <select id="position-select" class="text-input">
+                            <option value="bottom-center">Rodapé - Centro</option>
+                            <option value="bottom-right" selected>Rodapé - Direita</option>
+                            <option value="bottom-left">Rodapé - Esquerda</option>
+                            <option value="top-center">Cabeçalho - Centro</option>
+                            <option value="top-right">Cabeçalho - Direita</option>
+                            <option value="top-left">Cabeçalho - Esquerda</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="format-select">Formato do Texto:</label>
+                        <select id="format-select" class="text-input">
+                            <option value="page-total">Página X de Y</option>
+                            <option value="page-only">Página X</option>
+                            <option value="slash">X / Y</option>
+                            <option value="num-only">Apenas número (X)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="font-size-input">Tamanho da Fonte (pt):</label>
+                        <input type="number" id="font-size-input" class="text-input" value="10" min="6" max="24">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="margin-input">Margem da Borda (pt):</label>
+                        <input type="number" id="margin-input" class="text-input" value="20" min="5" max="100">
+                    </div>
+                </div>
+
+                <div class="checkbox-container">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="skip-first-chk">
+                        <span class="checkmark"></span>
+                        Ignorar a primeira página (útil quando há capa)
+                    </label>
+                </div>
+            </section>
+
+            <!-- PROGRESSO -->
+            <div class="progress-container hidden" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+                <span class="progress-text" id="progress-text">0%</span>
+            </div>
+
+            <!-- AÇÃO PRINCIPAL -->
+            <div class="action-bar">
+                <button id="process-btn" class="btn btn-primary" disabled>
+                    <span>🔢</span> Numerar Páginas e Gerar PDF
+                </button>
+            </div>
+
+            <!-- RESULTADO E DOWNLOAD -->
+            <section class="panel hidden" id="result-panel">
+                <h2 class="panel-title">4. Documento Gerado</h2>
+                <p class="result-message">Seu arquivo foi numerado com sucesso!</p>
+                <div class="action-bar" style="margin-top: 14px;">
+                    <a id="download-link" href="#" download="" class="btn btn-primary" style="text-decoration: none;">
+                        <span>📥</span> Baixar PDF Numerado
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>🔒 Processamento 100% Client-Side. Seus documentos não saem do seu navegador.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
